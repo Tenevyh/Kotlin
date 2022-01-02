@@ -1,16 +1,12 @@
-open class Animal {
-    open val image = ""
-    open val food = ""
-    open val habitat = ""
+abstract class Animal {
+    abstract val image : String
+    abstract val food : String
+    abstract val habitat : String
     val hunger = 0
 
-    open fun makeNoise(){
-        println("The Animal is making a noise")
-    }
+    abstract fun makeNoise()
 
-    open fun eat() {
-        println("The Animal is eating")
-    }
+    abstract fun eat()
 
     open fun roam(){
         println("The Animal is roaming")
@@ -35,13 +31,13 @@ class Hippo : Animal() {
     }
 }
 
-open class Canine : Animal(){
+abstract class Canine : Animal(){
     override fun roam(){
         println("The Canine is roaming")
     }
 }
 
-open class Wolf:Animal(){
+open class Wolf:Canine(){
     override val image = "wolf.jpg"
     override val food = "meat"
     override val habitat = "forests"
@@ -62,7 +58,7 @@ class Vet {
 }
 
 fun main (args: Array<String>) {
-    val animals = arrayOf(Hippo(); Wolf())
+    val animals = arrayOf(Hippo(), Wolf())
     for (item in animals) {
         item.roam()
         item.eat()
@@ -70,7 +66,7 @@ fun main (args: Array<String>) {
 
     val vet = Vet()
     val wolf = Wolf()
-    val Hippo = Hippo()
+    val hippo = Hippo()
     vet.giveShot(wolf)
     vet.giveShot(hippo)
 }
