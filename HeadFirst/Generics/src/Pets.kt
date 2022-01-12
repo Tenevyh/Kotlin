@@ -24,3 +24,22 @@ class Contest <T : Pet> {
 	}
 
 }
+
+fun main(args : Array<String>) {
+	val catFuzz = Cat("Fuzz Lightyear")
+	val catKatsu = Cat("Katsu")
+	val fishFinny = Fish("Finny McGraw")
+
+	val catContest = Contest<Cat>()
+	catContest.addScore(catFuss, 50)
+	catContest.addScore(catKatsu, 45)
+	val topCat = catContest.getWinners().first()
+	println("Cat contest winner is ${topCat.name}")
+
+	val petContest = Contest<Pet>()
+	petContest.addScore(catFuss, 50)
+	petContest.addScore(fishFinny, 56)
+	val topPet = petContest.getWinners().first()
+	println("Pet contest winner is ${topPet.name}")
+}
+
