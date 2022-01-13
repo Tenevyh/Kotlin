@@ -15,14 +15,38 @@ class Contest <T : Pet> {
 	}
 	
 	fun getWinners() : MutableSet<T> {
-		val highScore = scores.values.max()
+		val highScore = scores.values.maxOrNull()
 		val winners : MutableSet<T> = mutableSetOf()
 		for ((t, score) in scores) {
 			if (score == highScore) winners.add(t)
 		}
-		retern winners
+		return winners
 	}
+}
 
+interface Retailer <out T> {
+	fun sell() : T
+}
+
+class CatRetailer : Retailer <Cat> {
+	override fun sell() : Cat {
+		println("Sell Cat")
+		return Cat("")
+	}
+}
+	
+class DogRetailer : Retailer <Dog> {
+	override fun sell() : Dog {
+		println("Sell Dog")
+		return Dog("")
+	}
+}
+
+class FishRetailer : Retailer <Fish> {
+	override fun sell() : Fish {
+		println("Sell Fish")
+		return Fish("")
+	}
 }
 
 fun main(args : Array<String>) {
@@ -31,15 +55,20 @@ fun main(args : Array<String>) {
 	val fishFinny = Fish("Finny McGraw")
 
 	val catContest = Contest<Cat>()
-	catContest.addScore(catFuss, 50)
+	catContest.addScore(catFuzz, 50)
 	catContest.addScore(catKatsu, 45)
 	val topCat = catContest.getWinners().first()
 	println("Cat contest winner is ${topCat.name}")
 
 	val petContest = Contest<Pet>()
-	petContest.addScore(catFuss, 50)
+	petContest.addScore(catFuzz, 50)
 	petContest.addScore(fishFinny, 56)
 	val topPet = petContest.getWinners().first()
 	println("Pet contest winner is ${topPet.name}")
+
+	val dogRetailer : Retailer<Dog> = DogRetailer()
+	val catRetailer : Retailer<Cat> = CatRetailer()
+	val petRetailer : Retailer<Pet> = DogRetailer()
+	petRetailer.sell()
 }
 
