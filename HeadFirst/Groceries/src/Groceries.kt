@@ -8,26 +8,21 @@ fun main(args: Array<String>) {
 	Grocery("Olive oil", "Pantry", "Bottle", 6.0, 1),
 	Grocery("Ice cream", "Frozen", "Pack", 3.0, 2))
 
-	val vegetables = groceries.filter { it.category == "Vegetable" }
-	println("vegetable: $vegetables")
-	val notFrozen = groceries.filterNot { it.category == "Frozen" }
-	println("notFrozen: $notFrozen")
+	groceries.groupBy {it.category}.forEach {
+		println(it.key)
+		it.value.forEach{println("	${it.name}") }
+	}
 
-	val groceryNames = groceries.map { it.name }
-	println("groceryName: $groceryNames")
-	val halfUnitPrice = groceries.map { it.unitPrice*0.5 }
-	println("halfUnitPrice: $halfUnitPrice")
+	val ints = listOf(1, 2, 3)
+	val sumOfInts = ints.fold(0) {runningSum, item -> running + item }
+	println("sumOfInts: $sumOfInts")
 
-	val newPrices = groceries.filter { it.unitPrice>3.0 }.map { it.unitPrice*2 }
-	println("newPrices: $newPrices")
+	val productOfInts = ints.fold(1) {runningProduct, item -> runningProduct * item }
+	println("productOfInts: $productOfInts")
 
-	println("Grocery names: ")
-	groceries.forEach{println(it.name)}
+	val names = groceries.fold("") {string, item -> string + " ${item.name}")
+	println("names: $names")
 
-	println("Groceries with unitPrice > 3.0: ")
-	groceries.filter { it.unitPrice>3.0 }.forEach{println(it.name)}
-
-	var itemNames = ""
-	groceries.forEach { itemNames += "${it.name} " }
-	println("itemNames: $itemNames")
+	val changeFrom50 = groceries.fold(50.0) {change, item -> change - item.unitPrice * item.quantity }
+	println("changeFrom50: $changeFrom50")
 }
