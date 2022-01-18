@@ -14,13 +14,13 @@ fun main(args: Array<String>) {
 	}
 
 	val ints = listOf(1, 2, 3)
-	val sumOfInts = ints.fold(0) {runningSum, item -> running + item }
+	val sumOfInts = ints.fold(0) {runningSum, item -> runningSum + item }
 	println("sumOfInts: $sumOfInts")
 
 	val productOfInts = ints.fold(1) {runningProduct, item -> runningProduct * item }
 	println("productOfInts: $productOfInts")
 
-	val names = groceries.fold("") {string, item -> string + " ${item.name}")
+	val names = groceries.fold("") {string, item -> string + " ${item.name}"}
 	println("names: $names")
 
 	val changeFrom50 = groceries.fold(50.0) {change, item -> change - item.unitPrice * item.quantity }
