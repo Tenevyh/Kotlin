@@ -3,7 +3,7 @@ import javax.sound.sampled.AudioSystem
 
 fun playBeats(beats: String, file: String) {
 	val parts = beats.split("x")
-	val count = 0
+	var count = 0
 	for (part in parts) {
 		count += part.length + 1
 		if (part == "") {
