@@ -1,5 +1,8 @@
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.sound.sampled.AudioSystem
+
 
 fun playBeats(beats: String, file: String) {
 	val parts = beats.split("x")
@@ -19,12 +22,14 @@ fun playBeats(beats: String, file: String) {
 
 fun playSound(file: String) {
 	val clip = AudioSystem.getClip()
-	val audioInputStream = Audio.getAudioInputStream(File(file))
+	val audioInputStream = AudioSystem.getAudioInputStream(File(file))
 	clip.open(audioInputStream)
 	clip.start()
 }
 
 fun main() {
-	playBeats("x-x-x-x-x-x-", "toms.aiff")
-	playBeats("x-----x-----", "crash_cymbal.aiff")
+	GlobalScope.launch {
+		playBeats("x-x-x-x-x-x-", "toms.aiff")
+		playBeats("x-----x-----", "crash_cymbal.aiff")
+	}
 }
